@@ -15,7 +15,8 @@ app.use(
   cors({
     origin: [
       "http://localhost:3000", // if you run frontend locally (CRA)
-      
+      "http://localhost:5173", // if you use Vite
+      "https://expense-tracker-8s3669o5x-aarya-patel-s-projects.vercel.app", // your deployed frontend
     ],
     methods: ["GET", "POST", "PUT", "DELETE"],
     credentials: true,
