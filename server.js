@@ -11,9 +11,10 @@ const PORT = process.env.PORT || 5000;
 
 // ✅ CORS configuration to allow frontend requests
 app.use(cors({
-    origin: process.env.FRONTEND_URL,  // dynamic frontend URL
+    origin: "http://localhost:5173",
     credentials: true
   }));
+  
   
 
 app.use(express.json());
