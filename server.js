@@ -15,7 +15,7 @@ app.use(
   cors({
     origin: [
       "http://localhost:3000", // if you run frontend locally (CRA)
-      "https://expense-tracker-bi66svx0t-aarya-patel-s-projects.vercel.app", // your deployed frontend
+      "https://expense-tracker-2ntjf5nqm-aarya-patel-s-projects.vercel.app", // your deployed frontend
     ],
     methods: ["GET", "POST", "PUT", "DELETE"],
     credentials: true,
