@@ -1,3 +1,4 @@
+// server.js
 import express from "express";
 import mongoose from "mongoose";
 import dotenv from "dotenv";
@@ -6,17 +7,16 @@ import authRoutes from "./routes/auth.js";
 import transactionRoutes from "./routes/transactions.js";
 
 dotenv.config();
-
 const app = express();
 const PORT = process.env.PORT || 5000;
 
-// CORS configuration for local frontend only
+// Enable CORS for local frontend
 app.use(cors({
-  origin: "http://localhost:3000", // React frontend running locally
+  origin: "http://localhost:3000",
   credentials: true
 }));
 
-// Body parser
+// Parse JSON body
 app.use(express.json());
 
 // Connect to MongoDB Atlas
@@ -32,9 +32,7 @@ app.use("/auth", authRoutes);
 app.use("/transactions", transactionRoutes);
 
 // Root route
-app.get("/", (req, res) => {
-  res.send("Expense Tracker API Running");
-});
+app.get("/", (req, res) => res.send("Expense Tracker API Running"));
 
 // Start server
 app.listen(PORT, () => console.log(`🚀 Server running on port ${PORT}`));
