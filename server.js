@@ -14,7 +14,7 @@ const PORT = process.env.PORT || 5000;
 app.use(
   cors({
     origin: [
-      "http://localhost:3000", // if you run frontend locally (CRA)
+      
       "https://expense-tracker-2ntjf5nqm-aarya-patel-s-projects.vercel.app", // your deployed frontend
     ],
     methods: ["GET", "POST", "PUT", "DELETE"],
