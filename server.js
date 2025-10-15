@@ -10,27 +10,25 @@ dotenv.config();
 const app = express();
 const PORT = process.env.PORT || 5000;
 
-// ✅ Proper CORS setup for both local + deployed frontend
+// ✅ CORS setup (only for local React frontend)
 app.use(
   cors({
-    origin: [
-      
-      "https://expense-tracker-2ntjf5nqm-aarya-patel-s-projects.vercel.app", // your deployed frontend
-    ],
+    origin: "http://localhost:3000",
     methods: ["GET", "POST", "PUT", "DELETE"],
     credentials: true,
   })
 );
 
+// ✅ Middleware
 app.use(express.json());
 
-// ✅ Connect MongoDB Atlas (Serverless)
+// ✅ Connect to MongoDB Atlas
 mongoose
   .connect(process.env.MONGO_URI, {
     useNewUrlParser: true,
     useUnifiedTopology: true,
   })
-  .then(() => console.log("✅ MongoDB Connected Successfully"))
+  .then(() => console.log("✅ MongoDB Atlas Connected Successfully"))
   .catch((err) => console.error("❌ MongoDB Connection Error:", err));
 
 // ✅ Routes
@@ -39,14 +37,10 @@ app.use("/transactions", transactionRoutes);
 
 // ✅ Test route
 app.get("/", (req, res) => {
-  res.send("🚀 Expense Tracker Backend is Running Successfully!");
+  res.send("🚀 Expense Tracker Backend Running Locally with MongoDB Atlas!");
 });
 
-// ✅ Run server (for localhost)
-if (process.env.NODE_ENV !== "production") {
-  app.listen(PORT, () =>
-    console.log(`🚀 Server running locally on port ${PORT}`)
-  );
-}
-
-export default app; // ✅ required for Vercel deployment
+// ✅ Start local server
+app.listen(PORT, () => {
+  console.log(`🚀 Server running locally on http://localhost:${PORT}`);
+});
