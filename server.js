@@ -14,10 +14,14 @@ const PORT = process.env.PORT || 5000;
 // ===== CORS ===== //
 app.use(
   cors({
-    origin: "https://expense-tracker-2mz12c5ui-aarya-patel-s-projects.vercel.app" // Deployed frontend
-    
+    origin: [
+      "http://localhost:3000", // local dev
+      "https://expense-tracker-2mz12c5ui-aarya-patel-s-projects.vercel.app" // deployed frontend
+    ],
+    credentials: true,
   })
 );
+
 
 // ===== Middleware ===== //
 app.use(express.json());
