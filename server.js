@@ -6,22 +6,27 @@ import authRoutes from "./routes/auth.js";
 import transactionRoutes from "./routes/transactions.js";
 
 dotenv.config();
-const app = express();
 
-// ✅ Middleware
-app.use(cors());
+const app = express();
+const PORT = process.env.PORT || 5000;
+
+app.use(cors({
+  origin: ["http://localhost:3000", "https://expense-tracker-omega-seven-13.vercel.app"],
+  credentials: true
+}));
+
 app.use(express.json());
 
-// ✅ Routes
-app.use("/api/auth", authRoutes);
-app.use("/api/transactions", transactionRoutes);
+mongoose.connect(process.env.MONGO_URI, {
+  useNewUrlParser: true,
+  useUnifiedTopology: true
+})
+.then(() => console.log("✅ MongoDB Connected"))
+.catch(err => console.error("❌ MongoDB Connection Error:", err));
 
-// ✅ MongoDB connection
-mongoose
-  .connect(process.env.MONGO_URI)
-  .then(() => console.log("✅ MongoDB connected"))
-  .catch((err) => console.error("❌ MongoDB error:", err));
+app.use("/auth", authRoutes);
+app.use("/transactions", transactionRoutes);
 
-// ✅ Port binding (IMPORTANT for Render)
-const PORT = process.env.PORT || 5000;
+app.get("/", (req, res) => res.send("Expense Tracker API Running"));
+
 app.listen(PORT, () => console.log(`🚀 Server running on port ${PORT}`));
