@@ -3,8 +3,8 @@ import express from "express";
 import mongoose from "mongoose";
 import dotenv from "dotenv";
 import cors from "cors";
-import authRoutes from "./routes/auth.js";
-import transactionRoutes from "./routes/transactions.js";
+import authRoutes from "./routes/api/auth.js";
+import transactionRoutes from "./routes/api/transactions.js";
 
 dotenv.config();
 
