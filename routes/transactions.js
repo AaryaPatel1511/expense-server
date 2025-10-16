@@ -23,7 +23,8 @@ res.status(401).json({ message: 'Token is not valid' });
 // Get all transactions
 router.get('/', auth, async (req, res) => {
 try {
-const transactions = await Transaction.find({ userId: req.user.id }).sort({ date: -1 });
+    const transactions = await Transaction.find({ userId: req.user._id || req.user.id }).sort({ date: -1 });
+
 res.json(transactions);
 } catch (err) {
 res.status(500).json({ message: err.message });
@@ -35,7 +36,8 @@ res.status(500).json({ message: err.message });
 router.post('/', auth, async (req, res) => {
 try {
 const { type, amount, description } = req.body;
-const transaction = new Transaction({ userId: req.user.id, type, amount, description });
+const transaction = new Transaction({ userId: req.user._id || req.user.id, type, amount, description });
+
 await transaction.save();
 res.status(201).json(transaction);
 } catch (err) {
