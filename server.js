@@ -15,7 +15,7 @@ app.use(
   cors({
     origin: [
       "http://localhost:3000", // Local frontend
-      "https://expense-tracker-2mz12c5ui-aarya-patel-s-projects.vercel.app" // Deployed frontend
+      "https://expense-track-rohodqr0c-aarya-patel-s-projects.vercel.app" // Deployed frontend
     ],
     credentials: true,
   })
