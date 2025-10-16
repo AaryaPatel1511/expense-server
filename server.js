@@ -14,7 +14,7 @@ const PORT = process.env.PORT || 5000;
 app.use(
   cors({
     origin: [
-
+      "http://localhost:3000", // Local frontend
       "https://https://expense-track-kruagu4fg-aarya-patel-s-projects.vercel.app" // Deployed frontend
     ],
     credentials: true,
