@@ -14,7 +14,7 @@ const PORT = process.env.PORT || 5000;
 // ===== CORS ===== //
 app.use(
   cors({
-    origin: "https://expense-tracker-omega-seven-13.vercel.app" // Deployed frontend
+    origin: "https://expense-tracker-2mz12c5ui-aarya-patel-s-projects.vercel.app" // Deployed frontend
     
   })
 );
