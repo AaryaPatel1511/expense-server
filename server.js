@@ -10,10 +10,12 @@ dotenv.config();
 const app = express();
 const PORT = process.env.PORT || 5000;
 
+import cors from "cors";
 app.use(cors({
-  origin:  "https://expense-tracker-omega-seven-13.vercel.app"
+  origin: "https://expense-tracker-omega-seven-13.vercel.app" 
   
 }));
+
 
 app.use(express.json());
 
