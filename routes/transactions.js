@@ -18,7 +18,7 @@ const auth = (req, res, next) => {
   }
 };
 
-// Get all transactions
+// GET all transactions
 router.get("/", auth, async (req, res) => {
   try {
     const transactions = await Transaction.find({ userId: req.user.id }).sort({ date: -1 });
@@ -28,7 +28,7 @@ router.get("/", auth, async (req, res) => {
   }
 });
 
-// Add transaction
+// POST new transaction
 router.post("/", auth, async (req, res) => {
   try {
     const { type, amount, description } = req.body;
