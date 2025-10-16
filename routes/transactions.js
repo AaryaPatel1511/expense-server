@@ -1,3 +1,4 @@
+// routes/transactions.js
 import express from "express";
 import Transaction from "../models/Transaction.js";
 import jwt from "jsonwebtoken";
@@ -8,7 +9,6 @@ const router = express.Router();
 const auth = (req, res, next) => {
   const token = req.header("Authorization")?.split(" ")[1];
   if (!token) return res.status(401).json({ message: "No token, authorization denied" });
-
   try {
     const decoded = jwt.verify(token, process.env.JWT_SECRET);
     req.user = decoded;
@@ -18,7 +18,7 @@ const auth = (req, res, next) => {
   }
 };
 
-// GET all transactions
+// GET /api/transactions
 router.get("/", auth, async (req, res) => {
   try {
     const transactions = await Transaction.find({ userId: req.user.id }).sort({ date: -1 });
@@ -28,7 +28,7 @@ router.get("/", auth, async (req, res) => {
   }
 });
 
-// POST new transaction
+// POST /api/transactions
 router.post("/", auth, async (req, res) => {
   try {
     const { type, amount, description } = req.body;
