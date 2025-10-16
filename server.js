@@ -24,8 +24,8 @@ mongoose.connect(process.env.MONGO_URI, {
 .then(() => console.log("✅ MongoDB Connected"))
 .catch(err => console.error("❌ MongoDB Connection Error:", err));
 
-app.use("api/auth", authRoutes);
-app.use("api/transactions", transactionRoutes);
+app.use("/api/auth", authRoutes);
+app.use("/api/transactions", transactionRoutes);
 
 app.get("/", (req, res) => res.send("Expense Tracker API Running"));
 
