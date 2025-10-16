@@ -11,7 +11,8 @@ const app = express();
 const PORT = process.env.PORT || 5000;
 
 app.use(cors({
-  origin: ["http://localhost:3000", "https://expense-tracker-omega-seven-13.vercel.app"],
+  origin: ["http://localhost:3000", 
+      "https://expense-tracker-5d1xl0txr-aarya-patel-s-projects.vercel.app"],
   credentials: true
 }));
 
