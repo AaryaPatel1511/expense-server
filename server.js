@@ -1,34 +1,33 @@
 import express from "express";
-import cors from "cors";
-import dotenv from "dotenv";
 import mongoose from "mongoose";
+import dotenv from "dotenv";
+import cors from "cors";
 import authRoutes from "./routes/auth.js";
+import transactionRoutes from "./routes/transactions.js";
 
 dotenv.config();
 
 const app = express();
 const PORT = process.env.PORT || 5000;
 
-// ✅ Enable CORS for your frontend
 app.use(cors({
-  origin: "https://expense-tracker-jiseozimj-aarya-patel-s-projects.vercel.app", // frontend URL
-  methods: ["GET", "POST", "PUT", "DELETE"],
-  credentials: true, // allow cookies if needed
+  origin: ["http://localhost:3000", "https://expense-tracker-jiseozimj-aarya-patel-s-projects.vercel.app"],
+  credentials: true
 }));
 
-// Parse JSON
 app.use(express.json());
 
-// Routes
+mongoose.connect(process.env.MONGO_URI, {
+  useNewUrlParser: true,
+  useUnifiedTopology: true
+})
+.then(() => console.log("✅ MongoDB Connected"))
+.catch(err => console.error("❌ MongoDB Connection Error:", err));
+
 app.use("/auth", authRoutes);
+app.use("/transactions", transactionRoutes);
 
-// Root route for browser testing
-app.get("/", (req, res) => res.send("Backend is running"));
+app.get("/", (req, res) => res.send("Expense Tracker API Running"));
 
-// Connect to MongoDB
-mongoose.connect(process.env.MONGO_URL, { useNewUrlParser: true, useUnifiedTopology: true })
-  .then(() => {
-    console.log("MongoDB connected");
-    app.listen(PORT, () => console.log(`Server running on port ${PORT}`));
-  })
-  .catch(err => console.error("MongoDB connection error:", err));
+app.listen(PORT, () => console.log(`🚀 Server running on port ${PORT}`));
+
