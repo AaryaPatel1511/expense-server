@@ -10,7 +10,7 @@ const app = express();
 // ✅ Enable CORS for your frontend domain
 const allowedOrigins = [
   "http://localhost:3000", // local dev
-  "https://expense-tracker-5d1xl0txr-aarya-patel-s-projects.vercel.app" // vercel frontend
+  "https://expense-tracker-jiseozimj-aarya-patel-s-projects.vercel.app" // vercel frontend
 ];
 
 app.use(
