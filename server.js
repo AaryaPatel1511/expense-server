@@ -5,33 +5,24 @@ import cors from "cors";
 import authRoutes from "./routes/auth.js";
 
 dotenv.config();
+
 const app = express();
+const PORT = process.env.PORT || 5000;
 
-// ✅ Enable CORS for your frontend domain
-const allowedOrigins = [
-  "http://localhost:3000", // local dev
-  "https://expense-tracker-jiseozimj-aarya-patel-s-projects.vercel.app" // vercel frontend
-];
-
-app.use(
-  cors({
-    origin: allowedOrigins,
-    methods: ["GET", "POST", "PUT", "DELETE"],
-    credentials: true,
-  })
-);
-
+// Middlewares
+app.use(cors());
 app.use(express.json());
 
-// ✅ Routes
+// Routes
 app.use("/auth", authRoutes);
 
-mongoose
-  .connect(process.env.MONGO_URI)
+// Root route for browser
+app.get("/", (req, res) => res.send("Backend is running"));
+
+// MongoDB connection
+mongoose.connect(process.env.MONGO_URL, { useNewUrlParser: true, useUnifiedTopology: true })
   .then(() => {
-    console.log("✅ MongoDB Connected");
-    app.listen(process.env.PORT || 5000, () =>
-      console.log("🚀 Server running...")
-    );
+    console.log("MongoDB connected");
+    app.listen(PORT, () => console.log(`Server running on port ${PORT}`));
   })
-  .catch((err) => console.error("MongoDB Error:", err));
+  .catch(err => console.error("MongoDB connection error:", err));
